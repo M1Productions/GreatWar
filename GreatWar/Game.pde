@@ -9,9 +9,9 @@ public class Game {
   public Game() {
     this.strokeW = bHeight/90;
 
-    this.gameField = new GameField(bWidth/20, bHeight/10, bWidth*14/20, bHeight*7/10);
+    this.gameField = new GameField(bWidth/20, bHeight/10, bWidth*7/10, 10);
     this.menue = new Menue(bWidth/3, bHeight*9/10, bWidth/3, bHeight/10);
-    this.troopsMenue = new TroopsMenue(bWidth*8/10, bHeight/10, int(bWidth*1.5/10), bHeight*8/10);
+    this.troopsMenue = new TroopsMenue(bWidth*8/10, bHeight/10, bWidth*2/10, bHeight*8/10);
   }
 
   //draws menue bar on bottom

@@ -4,7 +4,7 @@ public static int bWidth, bHeight; //width and height but corrected for the 16:9
 public int mode; //the current menue (mainMEnue/game)
 public int roundness; //roundness of all corners
 
-public PImage backGroundImg;
+public PImage backGroundImg, weaponImg;
 
 MainMenue mainMenue;
 Game game;
@@ -25,8 +25,9 @@ public void setup() {
 public void draw() {
   //translates 0,0 next to the left/ upper black box (which make the screen 16:9)
   translateIn();
-
-  image(backGroundImg, 0, 0, bWidth, bHeight);
+  
+  background(0);
+  image(backGroundImg, 0, 0);
 
   //draws the menue the player currently is in (enumerated by menu variable)
   modeDraw();
@@ -34,7 +35,7 @@ public void draw() {
   //v allways last v
 
   //draws balck boxes to make the screen 16:9
-  drawScreenBorders();
+  //drawScreenBorders();
 }
 
 public void mousePressed() {
@@ -44,4 +45,11 @@ public void mousePressed() {
     case 1:
       game.click();       break;
   }
+}
+
+public void keyPressed() {
+  
+  // v Allways last! v
+  // catch the escape button to not quit the application
+  key = 0;
 }

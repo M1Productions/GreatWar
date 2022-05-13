@@ -12,7 +12,7 @@ public class TroopsMenue {
     this.category = 0;
 
     this.weaponsTBt = new ToggleButton(this.x, this.y, this.w, this.h/8, "Weapons");
-    this.weaponsTBt.setRoundness(roundness, roundness, 0, 0);
+    this.weaponsTBt.setRoundness(roundness, 0, 0, 0);
 
     this.placeWeapon = new Button(this.x+this.w/3, int(this.y+this.h*1.5/8), this.w/3, this.h/8, "W");
 
@@ -29,7 +29,7 @@ public class TroopsMenue {
     //no strokeWeight because the game dictates it
     stroke(0);
     fill(255);
-    rect(this.x, this.y+this.h/8, this.w, this.h*7/8, 0, 0, roundness, roundness); // draw basic border
+    rect(this.x, this.y+this.h/8, this.w, this.h*7/8, 0, 0, 0, roundness); // draw basic border
 
     // draw categories button
     this.weaponsTBt.draw();
@@ -51,7 +51,7 @@ public class TroopsMenue {
     }
     // click content of weapons category
     else if(this.placeWeapon.mouseIsOver()) {
-      // todo : spawn weapon
+      game.gameField.addWeapon();
     }
   }
 }

@@ -5,11 +5,18 @@ public void setupNew() {
   roundness = 20;
 
   //images
-  backGroundImg = loadImage("background.png");
-  backGroundImg.resize(bWidth, bHeight);
+  loadImages();
 
   //classes
   mainMenue = new MainMenue();
+}
+
+// load all images
+public void loadImages() {
+  backGroundImg = loadImage("background.png"); // background image desert
+  backGroundImg.resize(bWidth, bHeight);
+  
+  weaponImg = loadImage("weaponSpaceholder.png");
 }
 
 //calculates how the screen has to be changed to be a 16:9 format
@@ -35,7 +42,7 @@ public void translateIn() {
     translate(blackW, blackH);
 }
 
-//draws balck boxes to make the screen 16:9
+/*//draws balck boxes to make the screen 16:9
 public void drawScreenBorders() {
   noStroke();
   fill(0);
@@ -47,7 +54,7 @@ public void drawScreenBorders() {
     rect(-blackSize, 0, blackSize, bHeight);
     rect(bWidth, 0, blackSize, bHeight);
   }
-}
+}*/
 
 public void changeMode(int changeMode) {
   switch(changeMode) {

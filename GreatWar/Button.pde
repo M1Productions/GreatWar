@@ -28,22 +28,24 @@ public class Button {
 
   //draws button
   public void draw() {
-    if(this.active) {
-      //no strokeWeight because the menue this Button is in dictates it
-      stroke(0);
-      fill(255);
-      if(this.manualRoundness) {
-        rect(this.x, this.y, this.w, this.h, this.corner0, this.corner1, this.corner2, this.corner3);
+    pushStyle();
+      if(this.active) {
+        //no strokeWeight because the menue this Button is in dictates it
+        stroke(0);
+        fill(255);
+        if(this.manualRoundness) {
+          rect(this.x, this.y, this.w, this.h, this.corner0, this.corner1, this.corner2, this.corner3);
+        }
+        else {
+          rect(this.x, this.y, this.w, this.h, roundness);
+        }
+  
+        //no textSize because the menue this Button is in dictates it
+        fill(0);
+        textAlign(CENTER, CENTER);
+        text(this.label, this.x+this.w/2, this.y+this.h/2);
       }
-      else {
-        rect(this.x, this.y, this.w, this.h, roundness);
-      }
-
-      //no textSize because the menue this Button is in dictates it
-      fill(0);
-      textAlign(CENTER, CENTER);
-      text(this.label, this.x+this.w/2, this.y+this.h/2);
-    }
+    popStyle();
   }
 
   //true if mouse is over this button
@@ -54,10 +56,18 @@ public class Button {
   public void setActive(boolean set) {
     this.active = set;
   }
+  
+  public void setX(int x) {
+    this.x = x;
+  }
+  
+  public void setLabel(String l) {
+    this.label = l;
+  }
 }
 
 public class ToggleButton extends Button {
-  private boolean state; // if the button is turned on or of but does not controll the drawing or other operations
+  private boolean state, inverted; // if the button is turned on or of but does not controll the drawing or other operations, inverts the highlighting
 
   ToggleButton(int x, int y, int w, int h, String label) {
     super(x, y, w, h, label);
@@ -66,15 +76,17 @@ public class ToggleButton extends Button {
 
   public void draw() {
     super.draw();
-    if( !this.state) {
-      fill(200, 200);
-      noStroke();
-      if(this.manualRoundness) {
-        rect(this.x+game.strokeW/2, this.y+game.strokeW/2, this.w-game.strokeW, this.h-game.strokeW, this.corner0, this.corner1, this.corner2, this.corner3);
-      }
-      else {
-        rect(this.x+game.strokeW/2, this.y+game.strokeW/2, this.w-game.strokeW, this.h-game.strokeW, roundness);
-      }
+    if((!this.state && !this.inverted) || (this.state && this.inverted)) {
+      pushStyle();
+        fill(200, 200);
+        noStroke();
+        if(this.manualRoundness) {
+          rect(this.x, this.y, this.w, this.h, this.corner0, this.corner1, this.corner2, this.corner3);
+        }
+        else {
+          rect(this.x, this.y, this.w, this.h, roundness);
+        }
+      popStyle();
     }
   }
 
@@ -86,5 +98,9 @@ public class ToggleButton extends Button {
   }
   public boolean getState() {
     return this.state;
+  }
+  
+  public void invert() {
+    this.inverted = true;
   }
 }

@@ -25,7 +25,7 @@ public class Menue {
 
     stroke(0);
     fill(255);
-    rect(this.x, this.y, this.w, this.h, roundness);
+    rect(this.x, this.y, this.w, this.h, roundness, roundness, 0, 0);
 
     this.mainMenueBt.draw();
   }
