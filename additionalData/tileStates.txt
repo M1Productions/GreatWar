@@ -1,0 +1,16 @@
+each gameTile has:
+
+- empty: anything to draw? (true/false)
+- destroyed: !(can build anything?) (true/false)
+- groundType: (0=nothing, 1=dugout)
+- weaponType: (0=nothing, 1=spaceHolderWeapon)
+- soldier: can do anything? (0=false, 1=true)
+
+
+void addItem(type):
+
+- weapons
+	- 0 = spaceholderWeapon
+
+- ground types
+	- 1 = dugout

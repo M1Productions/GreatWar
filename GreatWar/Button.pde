@@ -2,7 +2,7 @@ public class Button {
   protected int x, y, w, h; //x,y coordinates, width, height
   private boolean active; //button does not draw or react if false
   protected boolean manualRoundness; // true if corner0 to corner3 != null
-  private String label; //the text on the button
+  protected String label; //the text on the button
   protected int corner0, corner1, corner2, corner3; // values for roundness of corners
 
   //constructor
@@ -28,29 +28,29 @@ public class Button {
 
   //draws button
   public void draw() {
-    pushStyle();
-      if(this.active) {
-        //no strokeWeight because the menue this Button is in dictates it
-        stroke(0);
-        fill(255);
-        if(this.manualRoundness) {
-          rect(this.x, this.y, this.w, this.h, this.corner0, this.corner1, this.corner2, this.corner3);
-        }
-        else {
-          rect(this.x, this.y, this.w, this.h, roundness);
-        }
-  
-        //no textSize because the menue this Button is in dictates it
-        fill(0);
-        textAlign(CENTER, CENTER);
-        text(this.label, this.x+this.w/2, this.y+this.h/2);
-      }
-    popStyle();
+    if(this.active) {
+      pushStyle();
+          // no strokeWeight because the menue this Button is in dictates it
+          stroke(0);
+          fill(255);
+          if(this.manualRoundness) {
+            rect(this.x, this.y, this.w, this.h, this.corner0, this.corner1, this.corner2, this.corner3);
+          }
+          else {
+            rect(this.x, this.y, this.w, this.h, roundness);
+          }
+   
+          //no textSize because the menue this Button is in dictates it
+          fill(0);
+          textAlign(CENTER, CENTER);
+          text(this.label, this.x+this.w/2, this.y+this.h/2);
+      popStyle();
+    }
   }
 
   //true if mouse is over this button
   public boolean mouseIsOver() {
-    return this.active && (mouseX-blackW>=this.x && mouseX-blackW<=this.x+this.w && mouseY-blackH>=this.y && mouseY-blackH<=this.y+this.h);
+    return this.active && (mX>=this.x && mX<=this.x+this.w && mY>=this.y && mY<=this.y+this.h);
   }
 
   public void setActive(boolean set) {
@@ -68,10 +68,19 @@ public class Button {
 
 public class ToggleButton extends Button {
   private boolean state, inverted; // if the button is turned on or of but does not controll the drawing or other operations, inverts the highlighting
-
-  ToggleButton(int x, int y, int w, int h, String label) {
+  private String labelOn, labelOff;
+  
+  public ToggleButton(int x, int y, int w, int h, String label) {
     super(x, y, w, h, label);
     this.state = false;
+    this.labelOn = label;
+    this.labelOff = label;
+  }
+  public ToggleButton(int x, int y, int w, int h, String labelOn, String labelOff) {
+    super(x, y, w, h, labelOff);
+    this.state = false;
+    this.labelOn = labelOn;
+    this.labelOff = labelOff;
   }
 
   public void draw() {
@@ -91,10 +100,16 @@ public class ToggleButton extends Button {
   }
 
   public void toggleState() {
-    this.state = !this.state; // invertes this.state
+    this.setState(!this.state); // invertes this.state
   }
   public void setState(boolean state) {
     this.state = state;
+    if(this.state && this.inverted || !this.state && !this.inverted) {
+      this.label = this.labelOff;
+    }
+    else {
+      this.label = labelOn;
+    }
   }
   public boolean getState() {
     return this.state;

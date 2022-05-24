@@ -10,11 +10,11 @@ public class MainMenue {
 
   //constructor
   public MainMenue() {
-    this.x = bWidth/3;
-    this.xs = bWidth/20;
-    this.y = bHeight/3;
-    this.w = bWidth/3;
-    this.h = bHeight/3;
+    this.x = int(bWidth/3);
+    this.xs = int(bWidth/20);
+    this.y = int(bHeight/3);
+    this.w = int(bWidth/3);
+    this.h = int(bHeight/3);
 
     this.strokeW = this.h/37;
     this.textS = this.h/10;
@@ -22,7 +22,7 @@ public class MainMenue {
     this.drawX = this.x;
     this.instanziateButtons();
     
-    this.quitBt = new Button(bWidth/3, bHeight-bHeight/10, bWidth/3, bHeight/10, "quit");
+    this.quitBt = new Button(int(bWidth/3), int(bHeight-bHeight/10), int(bWidth/3), int(bHeight/10), "quit");
     this.quitBt.setRoundness(roundness, roundness, 0, 0);
     
     this.settings = new Settings(); // one category of the main menue structure
@@ -33,15 +33,16 @@ public class MainMenue {
     this.update();
   }
   
-  private void instanziateButtons() {
-    this.advancedSettingsBt = new Button(this.x+this.w/5, this.y+this.h/2-this.w/10, this.w/5, this.w/5, "advanced");
-    this.gameTBt = new ToggleButton(this.x, this.y-this.h/3, this.w/2, this.h/3, "game");
-    this.settingsTBt = new ToggleButton(this.x+this.w/2, this.y-this.h/3, this.w/2, this.h/3, "settings");
-    this.newGameBt = new Button(this.x+this.w/5, this.y+this.h/2-this.w/10, this.w/5, this.w/5, "new");
-    this.continueGameBt = new Button(this.x+this.w*3/5, this.y+this.h/2-this.w/10, this.w/5, this.w/5, "continue");
+  private void instanziateButtons() { // create all Buttons int this Menu
+    this.advancedSettingsBt = new Button(0, this.y+this.h, this.w/3, this.h/5, "advanced");
+    this.gameTBt = new ToggleButton(0, this.y-this.h/3, this.w/2, this.h/3, "game");
+    this.settingsTBt = new ToggleButton(0, this.y-this.h/3, this.w/2, this.h/3, "settings");
+    this.newGameBt = new Button(0, this.y+this.h/2-this.w/10, this.w/5, this.w/5, "new");
+    this.continueGameBt = new Button(0, this.y+this.h/2-this.w/10, this.w/5, this.w/5, "continue");
     
-    this.settingsTBt.setRoundness(roundness, roundness, 0, 0);
-    this.gameTBt.setRoundness(roundness, roundness, 0, 0);
+    this.settingsTBt.setRoundness(0, roundness, 0, 0);
+    this.gameTBt.setRoundness(roundness, 0, 0, 0);
+    this.advancedSettingsBt.setRoundness(0, 0, roundness, roundness);
   }
 
   public void update() {
@@ -51,7 +52,7 @@ public class MainMenue {
   }
   
   private void shiftButtons() {
-    this.advancedSettingsBt.setX(this.drawX+this.w/5);
+    this.advancedSettingsBt.setX(this.drawX+this.w/3);
     this.gameTBt.setX(this.drawX);
     this.settingsTBt.setX(this.drawX+this.w/2);
     this.newGameBt.setX(this.drawX+this.w/5);
@@ -69,6 +70,7 @@ public class MainMenue {
     
     this.settings.draw(); // advanced settings
     
+    fill(255);
     rect(this.drawX, this.y, this.w, this.h, 0, 0, roundness, roundness); // draw main menue
 
     // select categories
